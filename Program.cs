@@ -22,12 +22,15 @@ namespace ANALIZADOR_LEXICO
 
           String[] encontrados= new String [PalabrasReservadas.Length];
 
+            int j=o;
+            
             for (int i = 0; i <PalabrasReservadas.Length ; i++)
             {
-
+                
                 if (cadena.Contains(PalabrasReservadas[i]))
                 {
-                    encontrados[i] = PalabrasReservadas[i];
+                    encontrados[j] = PalabrasReservadas[i];
+                    j++;
                 }
             }
 
