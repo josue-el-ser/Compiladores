@@ -43,6 +43,19 @@ namespace ANALIZADOR_LEXICO
         }
 
 
+        public static void AnalizadorIden(string cadena){
+            String identificador ="";
+            int estado = 1;
+            
+            for (int i=0; i<cadena.length; i++){
+                switch (estado){
+                    case 1: if(cadena[i].Ischar()){
+                    
+                    
+                    }
+                }
+            }
+        }
 
         static void Main(string[] args)
         {
