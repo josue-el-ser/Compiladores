@@ -8,11 +8,8 @@ namespace ANALIZADOR_LEXICO
 {
     class Program
     {
-
-       
-
-    
-
+            //nos falta arreglar para el identificador cuando empiece con 1a --- CORRECION : YA ESTA ARREGLADO!!!!!
+            //broders los mas fachas, nos falta tratar de corregir el automata del identificador... no se que mas :c
 
         public static  void AnalizadorDePalabra(string cadena)
         {
@@ -50,6 +47,13 @@ namespace ANALIZADOR_LEXICO
                             estado = 2;
                             identificador = identificador + cadena[i];
                             buscador[c] = identificador;
+                        }
+                        else
+                        {
+                            i = cadena.Length - 1;
+                            //considera que aqui no debe de ir este cierre porque de inmediato cierra el for, y asi ya no examina los demas caracteres de la cadena
+                            //supongamos que tenemos if(1<JosueElMasFacha)
+                            //el automata del identificador va a recorrer la cadena, pero al toparse con el "1" se va a cerrar, y por ende ya no se va a evaluar los demas caracteres
                         }
 
                         break;
