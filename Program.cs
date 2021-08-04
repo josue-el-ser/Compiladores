@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,51 +11,113 @@ namespace ANALIZADOR_LEXICO
 
        
 
-       public String[] Ayuda = new String[50];
+    
 
 
         public static  void AnalizadorDePalabra(string cadena)
         {
-            string[] PalabrasReservadas = { "lib", "namespace", "ent", "dec", "flot", "cad", "car", "bit","cons", "var","romp", "verdadero", "falso", "public", "priv", "for", "if", "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%", "{", "}", ";", "[", "]", "(", ")", ":" };
+            string[] Tokens = { "lib", "namespace", "ent", "dec", "flot", "cad", "car", "bit","cons", "var","romp", "verdadero", "falso", "public", "priv", "for", "if", "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%", "{", "}", ";", "[", "]", "(", ")", ":" };
             string[] Operadores = { "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%" };
             string[] Delimitadores = { "{", "}", ";", "[", "]", "(", ")", ":" };
+            string[] encontrados= new string [Tokens.Length];
+            string[] buscador=new string [80];
+            string[] identificadores = new string [80];
+            String identificador = "";
 
-          String[] encontrados= new String [PalabrasReservadas.Length];
+            int estado = 1;
+            int t = 0;
+            int c = 0;
+     
 
-            int j=o;
-            
-            for (int i = 0; i <PalabrasReservadas.Length ; i++)
+            for (int i = 0; i <Tokens.Length ; i++)
             {
-                
-                if (cadena.Contains(PalabrasReservadas[i]))
+
+                if (cadena.Contains(Tokens[i]))
                 {
-                    encontrados[j] = PalabrasReservadas[i];
-                    j++;
+                    encontrados[t] = Tokens[i];
+                    t++;
                 }
             }
+
+            // ANALIZADOR PARA EL IDENTIFICADOR
+            for (int i = 0; i < cadena.Length; i++)
+            {
+                switch (estado)
+                {
+                    case 1:
+                        if (char.IsLetter(cadena[i]))
+                        {
+                            estado = 2;
+                            identificador = identificador + cadena[i];
+                            buscador[c] = identificador;
+                        }
+
+                        break;
+                        
+                    case 2:
+                        if (char.IsLetter(cadena[i]) || char.IsDigit(cadena[i]))
+                        {
+                            estado = 2;
+                            identificador = identificador + cadena[i];
+                            buscador[c] = identificador;
+                            break;
+                        }
+                        else
+                        {
+                            buscador[c] = identificador;
+                            c++;
+                            estado = 1;
+                            identificador = "";
+                            break;
+                        }
+                }
+            }
+
+            bool iden=true;
+            int k = 0;
+
+            for (int j = 0; j < buscador.Length; j++)
+            {
+                for (int h = 0; h < Tokens.Length; h++)
+                {
+                    
+                    if (buscador[j] == Tokens[h])
+                    {
+                        iden = false;
+                        h = Tokens.Length - 1;
+                    }
+                    else
+                    {
+                        iden = true;
+                        
+                    }
+                }
+
+                if (iden)
+                {
+                    identificadores[k] = buscador[j];
+                    k++;
+                }
+                
+            }
+
 
             Console.WriteLine("Los Tokens encontrados son:");
             foreach (string s in encontrados)
             {
-                Console.Write(s);
+                Console.WriteLine(s);
             }
-        
+
+            Console.WriteLine("Los identificadores encontrados son:");
+            foreach (string a in identificadores)
+            {
+                Console.WriteLine(a);
+            }
+
         }
 
 
-        public static void AnalizadorIden(string cadena){
-            String identificador ="";
-            int estado = 1;
-            
-            for (int i=0; i<cadena.length; i++){
-                switch (estado){
-                    case 1: if(cadena[i].Ischar()){
-                    
-                    
-                    }
-                }
-            }
-        }
+       
 
         static void Main(string[] args)
         {
@@ -67,3 +129,4 @@ namespace ANALIZADOR_LEXICO
         }
     }
 }
+
