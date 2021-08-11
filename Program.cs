@@ -4,7 +4,7 @@ namespace ANALIZADOR_LEXICO
 {
     class Program
     {
-        private static string[] Tokens = { "lib", "namespace", "ent", "dec", "flot", "cad", "car", "bit", "cons", "var", "romp", "verdadero", "falso", "public", "priv", "for", "if", "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%", "{", "}", ";", "[", "]", "(", ")", ":", ">" };
+        private static string[] Tokens = { "lib", "namespace", "ent", "dec", "flot", "cad", "car", "bit", "cons", "var", "romp", "verdadero", "falso", "public", "priv","vac","est","nue","retor","interfaz","intentar","cap","enum","bol","clase","virtual","releer","abs","base","this","si","sino", "mientras", "para","encaso","caso","defecto","hacer","imprimir","nulo", "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%","==","=",">","<",">=", "<=", "||","|","!","&&","^","!=","<>","?:","{", "}", ";", "[", "]", "(", ")", ":", "'", "/", "/*","*/" };
         private static string[] Operadores = { "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%" };
 
         public static  void AnalizadorDePalabra(string cadena)
