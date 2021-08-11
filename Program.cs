@@ -4,17 +4,21 @@ namespace ANALIZADOR_LEXICO
 {
     class Program
     {
+        // Vector general que contiene a todos los tokens del lenguaje
         private static string[] Tokens = { "lib", "namespace", "ent", "dec", "flot", "cad", "car", "bit", "cons", "var", "romp", "verdadero", "falso", "public", "priv","vac","est","nue","retor","interfaz","intentar","cap","enum","bol","clase","virtual","releer","abs","base","this","si","sino", "mientras", "para","encaso","caso","defecto","hacer","imprimir","nulo", "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%","==","=",">","<",">=", "<=", "||","|","!","&&","^","!=","<>","?:","{", "}", ";", "[", "]", "(", ")", ":", "'", "/", "/*","*/" };
-        private static string[] Operadores = { "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%" };
+        //vectores especificos que contienen a una parte de los tokens 
+        private static string[] PalabrasReservadas = { "lib", "namespace", "ent", "dec", "flot", "cad", "car", "bit", "cons", "var", "romp", "verdadero", "falso", "public", "priv", "vac", "est", "nue", "retor", "interfaz", "intentar", "cap", "enum", "bol", "clase", "virtual", "releer", "abs", "base", "this", "si", "sino", "mientras", "para", "encaso", "caso", "defecto", "hacer", "imprimir", "nulo" };
+        private static string[] Delimitadores = { "{", "}", ";", "[", "]", "(", ")", ":", "'", "/", "/*", "*/" };
+        private static string[] Operadores = { "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%" , "==", "=", ">", "<", ">=", "<=", "||", "|", "!", "&&", "^", "!=", "<>", "?:" };
 
+        //metodo que analiza si se encuentra tokens en la cadena de entrada
         public static  void AnalizadorDePalabra(string cadena)
         {
-           
-            string[] Delimitadores = { "{", "}", ";", "[", "]", "(", ")", ":" };
+         
             string[] encontrados= new string [Tokens.Length];
-            string[] buscador=new string [80];
+            
 
-            int estado = 1;
+           
             int t = 0;
             int c = 0;
      
