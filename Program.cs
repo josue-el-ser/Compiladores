@@ -8,13 +8,12 @@ namespace ANALIZADOR_LEXICO
 {
     class Program
     {
-            //nos falta arreglar para el identificador cuando empiece con 1a --- CORRECION : YA ESTA ARREGLADO!!!!!
-            //broders los mas fachas, nos falta tratar de corregir el automata del identificador... no se que mas :c
+        private static string[] Tokens = { "lib", "namespace", "ent", "dec", "flot", "cad", "car", "bit", "cons", "var", "romp", "verdadero", "falso", "public", "priv", "for", "if", "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%", "{", "}", ";", "[", "]", "(", ")", ":", ">" };
+        private static string[] Operadores = { "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%" };
 
         public static  void AnalizadorDePalabra(string cadena)
         {
-            string[] Tokens = { "lib", "namespace", "ent", "dec", "flot", "cad", "car", "bit","cons", "var","romp", "verdadero", "falso", "public", "priv", "for", "if", "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%", "{", "}", ";", "[", "]", "(", ")", ":" };
-            string[] Operadores = { "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%" };
+           
             string[] Delimitadores = { "{", "}", ";", "[", "]", "(", ")", ":" };
             string[] encontrados= new string [Tokens.Length];
             string[] buscador=new string [80];
@@ -36,76 +35,6 @@ namespace ANALIZADOR_LEXICO
                 }
             }
 
-            // ANALIZADOR PARA EL IDENTIFICADOR
-            for (int i = 0; i < cadena.Length; i++)
-            {
-                switch (estado)
-                {
-                    case 1:
-                        if (char.IsLetter(cadena[i]))
-                        {
-                            estado = 2;
-                            identificador = identificador + cadena[i];
-                            buscador[c] = identificador;
-                        }
-                        else
-                        {
-                            i = cadena.Length - 1;
-                            //considera que aqui no debe de ir este cierre porque de inmediato cierra el for, y asi ya no examina los demas caracteres de la cadena
-                            //supongamos que tenemos if(1<JosueElMasFacha)
-                            //el automata del identificador va a recorrer la cadena, pero al toparse con el "1" se va a cerrar, y por ende ya no se va a evaluar los demas caracteres
-                        }
-
-                        break;
-                        
-                    case 2:
-                        if (char.IsLetter(cadena[i]) || char.IsDigit(cadena[i]))
-                        {
-                            estado = 2;
-                            identificador = identificador + cadena[i];
-                            buscador[c] = identificador;
-                            break;
-                        }
-                        else
-                        {
-                            buscador[c] = identificador;
-                            c++;
-                            estado = 1;
-                            identificador = "";
-                            break;
-                        }
-                }
-            }
-
-            bool iden=true;
-            int k = 0;
-
-            for (int j = 0; j < buscador.Length; j++)
-            {
-                for (int h = 0; h < Tokens.Length; h++)
-                {
-                    
-                    if (buscador[j] == Tokens[h])
-                    {
-                        iden = false;
-                        h = Tokens.Length - 1;
-                    }
-                    else
-                    {
-                        iden = true;
-                        
-                    }
-                }
-
-                if (iden)
-                {
-                    identificadores[k] = buscador[j];
-                    k++;
-                }
-                
-            }
-
-
             Console.WriteLine("Los Tokens encontrados son:");
             foreach (string s in encontrados)
             {
@@ -120,7 +49,83 @@ namespace ANALIZADOR_LEXICO
 
         }
 
+        public static void AnalizadorDeIdentificador(string cadena)
+        {
+            int estado = 0;
+            string cIdentificador = "";
+            int c = 0;
+            string[] recopilado = new string [50];
+            string[] identificadores = new string[80];
 
+            for (int i = 0; i < cadena.Length; i++)
+            {
+                switch (estado)
+                {
+                    case 0:
+                        if (char.IsLetter(cadena[i]))
+                        {
+                            estado = 1;
+                            cIdentificador = cIdentificador + cadena[i];
+                            recopilado[c] = cIdentificador;
+                        }
+                        break;
+
+                    case 1:
+                        if (char.IsLetterOrDigit(cadena[i]) || cadena[i]=='_')
+                        {
+                            estado = 1;
+                            cIdentificador = cIdentificador + cadena[i];
+                            recopilado[c] = cIdentificador;
+                        }
+                        else
+                        {
+                            estado = 0;
+                            recopilado[c] = cIdentificador;
+                            c++;
+                            cIdentificador = "";
+                        }
+                        break;
+                    
+                }
+            }
+
+
+            bool iden = true;
+            int k = 0;
+
+            for (int j = 0; j < recopilado.Length; j++)
+            {
+                for (int h = 0; h < Tokens.Length; h++)
+                {
+
+                    if (recopilado[j] == Tokens[h])
+                    {
+                        iden = false;
+                        h = Tokens.Length - 1;
+                    }
+                    else
+                    {
+                        iden = true;
+
+                    }
+                }
+
+                if (iden)
+                {
+                    identificadores[k] = recopilado[j];
+                    k++;
+                }
+
+            }
+            
+
+            Console.WriteLine("Los identificadores encontrados son:");
+            foreach (string a in identificadores)
+            {
+                Console.WriteLine(a);
+            }
+        }
+        
        
 
         static void Main(string[] args)
