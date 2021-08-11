@@ -16,9 +16,7 @@ namespace ANALIZADOR_LEXICO
         {
          
             string[] encontrados= new string [Tokens.Length];
-            
 
-           
             int t = 0;
             int c = 0;
      
@@ -37,12 +35,6 @@ namespace ANALIZADOR_LEXICO
             foreach (string s in encontrados)
             {
                 Console.WriteLine(s);
-            }
-
-            Console.WriteLine("Los identificadores encontrados son:");
-            foreach (string a in identificadores)
-            {
-                Console.WriteLine(a);
             }
 
         }
@@ -127,7 +119,7 @@ namespace ANALIZADOR_LEXICO
         }
         
        
-
+        //principal
         static void Main(string[] args)
         {
             Console.WriteLine("Escriba algo");
