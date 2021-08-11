@@ -24,7 +24,7 @@ namespace ANALIZADOR_LEXICO
             int t = 0;
             int c = 0;
      
-
+            //for que recorre el vector de tokens para que se examine con la cadena de texto
             for (int i = 0; i <Tokens.Length ; i++)
             {
 
@@ -49,6 +49,7 @@ namespace ANALIZADOR_LEXICO
 
         }
 
+        //metodo que evalua un identificador
         public static void AnalizadorDeIdentificador(string cadena)
         {
             int estado = 0;
@@ -57,6 +58,7 @@ namespace ANALIZADOR_LEXICO
             string[] recopilado = new string [50];
             string[] identificadores = new string[80];
 
+            //for que recorre la cadena 
             for (int i = 0; i < cadena.Length; i++)
             {
                 switch (estado)
@@ -89,7 +91,7 @@ namespace ANALIZADOR_LEXICO
                 }
             }
 
-
+            //evaluacion para que separa las palabras reservadas de los tokens
             bool iden = true;
             int k = 0;
 
