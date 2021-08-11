@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ANALIZADOR_LEXICO
 {
@@ -12,14 +16,12 @@ namespace ANALIZADOR_LEXICO
         private static string[] Operadores = { "+", "*", "-", "/", "++", "--", "+=", "-=", "*=", "%" , "==", "=", ">", "<", ">=", "<=", "||", "|", "!", "&&", "^", "!=", "<>", "?:" };
 
         //metodo que analiza si se encuentra tokens en la cadena de entrada
-        public static  void AnalizadorDePalabra(string cadena)
+        public static  void AnalizadorDeTokens(string cadena)
         {
-         
             string[] encontrados= new string [Tokens.Length];
-
             int t = 0;
             int c = 0;
-     
+
             //for que recorre el vector de tokens para que se examine con la cadena de texto
             for (int i = 0; i <Tokens.Length ; i++)
             {
@@ -36,7 +38,8 @@ namespace ANALIZADOR_LEXICO
             {
                 Console.WriteLine(s);
             }
-
+   
+            
         }
 
         //metodo que evalua un identificador
@@ -81,7 +84,7 @@ namespace ANALIZADOR_LEXICO
                 }
             }
 
-            //evaluacion para que separa las palabras reservadas de los tokens
+            //evaluacion que separa las palabras reservadas de los tokens
             bool iden = true;
             int k = 0;
 
@@ -117,17 +120,16 @@ namespace ANALIZADOR_LEXICO
                 Console.WriteLine(a);
             }
         }
-        
-       
+
         //principal
         static void Main(string[] args)
         {
             Console.WriteLine("Escriba algo");
             string cadena = Console.ReadLine();
-            AnalizadorDePalabra(cadena);
+            AnalizadorDeTokens(cadena);
+            AnalizadorDeIdentificador(cadena);
             Console.ReadKey();
 
         }
     }
 }
-
