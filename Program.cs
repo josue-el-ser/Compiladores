@@ -28,7 +28,7 @@ namespace ANALIZADOR_LEXICO
                     t++;
                 }
             }
-
+            //Imprime los tokens encontrados
             Console.WriteLine("Los Tokens encontrados son:");
             foreach (string s in encontrados)
             {
@@ -109,7 +109,7 @@ namespace ANALIZADOR_LEXICO
 
             }
             
-
+            //Imprime los identificadores encontrados
             Console.WriteLine("Los identificadores encontrados son:");
             foreach (string a in identificadores)
             {
