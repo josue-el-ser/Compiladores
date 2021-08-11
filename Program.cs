@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ANALIZADOR_LEXICO
 {
@@ -17,8 +13,6 @@ namespace ANALIZADOR_LEXICO
             string[] Delimitadores = { "{", "}", ";", "[", "]", "(", ")", ":" };
             string[] encontrados= new string [Tokens.Length];
             string[] buscador=new string [80];
-            string[] identificadores = new string [80];
-            String identificador = "";
 
             int estado = 1;
             int t = 0;
