@@ -28,6 +28,9 @@ namespace ANALIZADOR_LEXICO
                     t++;
                 }
             }
+            
+
+                
             //Imprime los tokens encontrados
             Console.WriteLine("Los Tokens encontrados son:");
             foreach (string s in encontrados)
